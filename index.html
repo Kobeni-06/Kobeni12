@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pregunta especial</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at top left, #ff0066, #222222, #000000);
+      font-family: 'Montserrat', sans-serif;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 20px;
+      padding: 30px 25px;
+      text-align: center;
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      width: 90%;
+      max-width: 380px;
+      height: 420px;       /* MÁS ALTO PARA QUE EL BOTÓN NO PUEDA SALIRSE */
+      position: relative;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 25px;
+      text-shadow: 0 0 15px rgba(255,255,255,0.15);
+    }
+
+    .btn {
+      width: 30%;
+      padding: 7px 0;
+      margin: 8px auto;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.45);
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      display: block;
+}
+
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #ff0066;
+      border-color: #ff0066;
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 0 25px rgba(255, 0, 102, 0.6);
+    }
+
+    /* botón NO */
+    .btn-no {
+      position: absolute;
+      left: 50%;
+      top: 65%;
+      transform: translateX(-50%);
+    }
+
+    .mensaje-final {
+      display: none;
+      font-size: 20px;
+      color: #ff0066;
+      font-weight: 600;
+      margin-top: 20px;
+      font-family: 'Playfair Display', serif;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    .mensaje-final img {
+      margin-top: 20px;
+      width: 220px;
+      max-width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 0 24px rgba(0,0,0,0.6);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- RESPONSIVO PARA CELULARES --- */
+    @media (max-width: 480px) {
+      .btn {
+        width: 85%;
+        padding: 10px;
+        font-size: 14px;
+      }
+
+      .container {
+        height: 390px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container" id="contenedor">
+    <h1 id="pregunta">¿Quieres ser mi novia?</h1>
+
+    <button class="btn" id="btnSi" onclick="aceptar()">Sí</button>
+    <button class="btn btn-no" id="btnNo">No</button>
+
+    <div class="mensaje-final" id="mensajeFinal">
+      ¡Sabía que dirías que sí My Love ❤️!<br>
+      <img src="https://img1.picmix.com/output/stamp/normal/0/9/1/3/2463190_132df.png" alt="Romántico">
+    </div>
+  </div>
+
+  <script>
+    const btnNo = document.getElementById("btnNo");
+    const btnSi = document.getElementById("btnSi");
+    const mensajeFinal = document.getElementById("mensajeFinal");
+    const contenedor = document.getElementById("contenedor");
+    const pregunta = document.getElementById("pregunta");
+
+    function moverBoton() {
+      const maxX = contenedor.clientWidth - btnNo.clientWidth;
+      const maxY = contenedor.clientHeight - btnNo.clientHeight;
+
+      const nuevoX = Math.random() * maxX;
+      const nuevoY = Math.random() * maxY;
+
+      btnNo.style.left = `${nuevoX}px`;
+      btnNo.style.top = `${nuevoY}px`;
+    }
+
+    btnNo.addEventListener("mouseenter", moverBoton);
+
+    btnNo.addEventListener("touchstart", function(e) {
+      e.preventDefault();
+      moverBoton();
+    });
+
+    function aceptar() {
+      pregunta.style.display = "none";
+      btnNo.style.display = "none";
+      btnSi.style.display = "none";
+      mensajeFinal.style.display = "block";
+    }
+  </script>
+</body>
+</html>
